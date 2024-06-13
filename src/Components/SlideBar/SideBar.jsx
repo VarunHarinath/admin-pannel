@@ -1,7 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { navigation, navsFooter } from "../../constants";
+import { useParams } from "react-router-dom";
 
 const SideBar = ({ isOpen, toggleSidebar }) => {
+  const id = useParams();
+  const [eventData, setEventData] = useState(null);
+
+  useEffect(() => {
+    const fetchEventApi = async () => {
+      try {
+        const response = await axios.get(
+          `https://tesract-server.onrender.com/event/${id}`
+        );
+        setEventData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchEventApi();
+  });
   return (
     <>
       <div
@@ -49,22 +68,6 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                   </li>
                 ))}
               </ul>
-              <div className="py-4 px-4">
-                <div className="flex items-center gap-x-4">
-                  <img
-                    src="https://randomuser.me/api/portraits/women/79.jpg"
-                    className="w-12 h-12 rounded-full"
-                  />
-                  <div>
-                    <span className="block text-gray-100 text-sm font-semibold">
-                      Alivika Tony
-                    </span>
-                    <p className="block mt-px text-gray-300 text-xs cursor-pointer">
-                      View profile
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
