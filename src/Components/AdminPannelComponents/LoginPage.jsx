@@ -23,7 +23,9 @@ const LoginPage = () => {
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/event/${id}`);
+        const response = await axios.get(
+          ` https://tesract-server.onrender.com/event/${id}`
+        );
         setEventData(response.data.data);
       } catch (error) {
         console.error("Error fetching event data:", error);
