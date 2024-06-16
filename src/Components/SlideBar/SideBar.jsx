@@ -1,26 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
+
 import { navigation, navsFooter } from "../../constants";
+
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SideBar = ({ isOpen, toggleSidebar }) => {
-  const id = useParams();
-  const [eventData, setEventData] = useState(null);
+  const eventSelector = useSelector((state) => state.eventId.value);
 
-  useEffect(() => {
-    const fetchEventApi = async () => {
-      try {
-        const response = await axios.get(
-          `https://tesract-server.onrender.com/event/${id}`
-        );
-        setEventData(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchEventApi();
-  });
   return (
     <>
       <div
@@ -44,13 +32,13 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             <ul className="px-4 text-sm font-medium flex-1">
               {navigation.map((item, idx) => (
                 <li key={idx}>
-                  <a
-                    href={item.href}
+                  <Link
+                    href={`${item.href}/${eventSelector.eventId}`}
                     className="flex items-center gap-x-2 text-gray-300 p-2 rounded-lg hover:bg-gray-800 active:bg-gray-700 duration-150"
                   >
                     <div className="text-gray-500">{item.icon}</div>
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

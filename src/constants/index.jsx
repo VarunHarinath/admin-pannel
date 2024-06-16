@@ -1,6 +1,6 @@
 export const navigation = [
   {
-    href: "/secure/v3/dasboard/overview/:id",
+    href: "/secure/v3/dasboard/overview",
     name: "Overview",
     icon: (
       <svg
@@ -21,7 +21,7 @@ export const navigation = [
     ),
   },
   {
-    href: "/secure/v3/dasboard/participants/:id",
+    href: "/secure/v3/dasboard/participants",
     name: "Participants",
     icon: (
       <svg
@@ -44,7 +44,7 @@ export const navigation = [
     ),
   },
   {
-    href: "/secure/v3/dasboard/financial-reports/:id",
+    href: "/secure/v3/dasboard/financial-reports",
     name: "Financial Reports",
     icon: (
       <svg
@@ -65,7 +65,7 @@ export const navigation = [
     ),
   },
   {
-    href: "/secure/v3/dasboard/change-event-details/:id",
+    href: "/secure/v3/dasboard/change-event-details",
     name: "Change Event Details",
     icon: (
       <svg
@@ -87,7 +87,7 @@ export const navigation = [
     ),
   },
   {
-    href: "/secure/v3/dasboard/mail-to-participants/:id",
+    href: "/secure/v3/dasboard/mail-to-participants",
     name: "Mail to Participants",
     icon: (
       <svg
