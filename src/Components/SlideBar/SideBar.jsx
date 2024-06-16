@@ -33,7 +33,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               {navigation.map((item, idx) => (
                 <li key={idx}>
                   <Link
-                    href={`${item.href}/${eventSelector.eventId}`}
+                    to={`${item.href}/${eventSelector.eventId}`}
                     className="flex items-center gap-x-2 text-gray-300 p-2 rounded-lg hover:bg-gray-800 active:bg-gray-700 duration-150"
                   >
                     <div className="text-gray-500">{item.icon}</div>
