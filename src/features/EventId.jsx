@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const eventIdSlice = createSlice({
   name: "eventId",
-  initialState: { value: { eventId: "adbc" } },
+  initialState: { value: { eventId: null } },
   reducers: {
     setEventId: (state, action) => {
       state.value = action.payload;
