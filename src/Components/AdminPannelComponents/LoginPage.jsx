@@ -18,6 +18,7 @@ const LoginPage = () => {
   // Function to handle form submission
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setSpinner(true);
     try {
       const response = await axios.post(
         `https://tesract-server.onrender.com/event/login/${id}`,
@@ -31,9 +32,11 @@ const LoginPage = () => {
       }
       if (response.data.error) {
         setError(response.data.error);
+        setSpinner(false);
       }
     } catch (error) {
       console.log(error);
+      setSpinner(false);
     }
   };
 
