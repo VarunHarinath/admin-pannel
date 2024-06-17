@@ -18,16 +18,15 @@ const LoginPage = () => {
   // Function to handle form submission
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setError("");
     setSpinner(true);
     try {
       const response = await axios.post(
         `https://tesract-server.onrender.com/event/login/${id}`,
         { username, password }
       );
-      console.log(response.data);
       if (response.data.message) {
         dispatcher(setEventId({ eventId: id }));
-
         navigate(`/secure/v3/dasboard/overview/${id}`);
       }
       if (response.data.error) {
