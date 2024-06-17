@@ -11,6 +11,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [spinner, setSpinner] = useState(false);
   const [error, setError] = useState("");
   const { id } = useParams();
 
@@ -149,9 +150,39 @@ const LoginPage = () => {
             </button>
           </div>
           <div className=" text-red-600 font-semibold">{error}</div>
-          <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
-            Login to your dashboard
-          </button>
+          {spinner ? (
+            <button
+              className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150 flex justify-center items-center"
+              disabled
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                className="animate-spin h-5 w-5 mr-3"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"
+                >
+                  <animateTransform
+                    attributeName="transform"
+                    dur="0.75s"
+                    repeatCount="indefinite"
+                    type="rotate"
+                    values="0 12 12;360 12 12"
+                    className="m-2"
+                  ></animateTransform>
+                </path>
+              </svg>
+              <span className="ml-2">Taking you to your event 🎇</span>
+            </button>
+          ) : (
+            <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+              Login to your dashboard
+            </button>
+          )}
         </form>
         <div className="text-center mt-5">
           <p href="javascript:void(0)" className="text-indigo-100">
