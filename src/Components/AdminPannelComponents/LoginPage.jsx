@@ -20,7 +20,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:8080/event/login/${id}`,
+        `https://tesract-server.onrender.com/event/login/${id}`,
         { username, password }
       );
       console.log(response.data);
