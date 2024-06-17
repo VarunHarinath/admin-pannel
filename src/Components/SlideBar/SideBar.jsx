@@ -46,13 +46,13 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               <ul className="px-4 pb-4 text-sm font-medium">
                 {navsFooter.map((item, idx) => (
                   <li key={idx}>
-                    <a
-                      href={item.href}
+                    <Link
+                      to={`${item.href}/${eventSelector.eventId}`}
                       className="flex items-center gap-x-2 text-gray-300 p-2 rounded-lg hover:bg-gray-800 active:bg-gray-700 duration-150"
                     >
                       <div className="text-gray-500">{item.icon}</div>
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

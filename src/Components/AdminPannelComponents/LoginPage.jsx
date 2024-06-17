@@ -9,18 +9,36 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [eventData, setEventData] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { id } = useParams();
 
   // Function to handle form submission
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    dispatcher(setEventId({ eventId: id }));
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/event/login/${id}`,
+        { username, password }
+      );
+      console.log(response.data);
+      if (response.data.message) {
+        dispatcher(setEventId({ eventId: id }));
 
-    navigate(`/secure/v3/dasboard/overview/${id}`);
+        navigate(`/secure/v3/dasboard/overview/${id}`);
+      }
+      if (response.data.error) {
+        setError(response.data.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Fetch event data on component mount
   useEffect(() => {
+    dispatcher(setEventId({ eventId: null }));
     const fetchEventData = async () => {
       try {
         const response = await axios.get(
@@ -32,7 +50,7 @@ const LoginPage = () => {
       }
     };
     fetchEventData();
-  }, [id]);
+  }, []);
 
   // Function to toggle password visibility
   const togglePasswordVisibility = () => {
@@ -45,8 +63,21 @@ const LoginPage = () => {
         <div className="text-center">
           <div className="mt-5 space-y-4">
             <p className="text-gray-200">Admin dashboard</p>
-            <h3 className="text-indigo-600 text-2xl font-bold sm:text-3xl">
-              {eventData?.eventName}
+            <h3 className="">
+              {/* {eventData?.eventName} */}
+              {eventData ? (
+                <>
+                  <span className="text-indigo-600 text-2xl font-bold sm:text-3xl">
+                    {eventData?.eventName}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className=" text-red-600 font-semibold">
+                    An Error Occured. Please use the <b>link to Login again</b>
+                  </span>
+                </>
+              )}
             </h3>
             <p className="text-gray-300 text-xs sm:text-sm mt-2">
               "Great events are crafted with vision, precision, and dedication.
@@ -62,6 +93,8 @@ const LoginPage = () => {
               required
               className="w-full mt-2 px-3 py-2 text-gray-100 bg-gray-800 outline-none border border-gray-700 focus:border-indigo-600 shadow-sm rounded-xl"
               autoComplete="current-username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="relative">
@@ -71,6 +104,8 @@ const LoginPage = () => {
               required
               className="w-full mt-2 px-3 py-2 text-gray-100 bg-gray-800 outline-none border border-gray-700 focus:border-indigo-600 shadow-sm rounded-xl pr-10"
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               type="button"
@@ -113,6 +148,7 @@ const LoginPage = () => {
               )}
             </button>
           </div>
+          <div className=" text-red-600 font-semibold">{error}</div>
           <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
             Login to your dashboard
           </button>

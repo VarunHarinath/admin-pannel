@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SideBar from "./Components/SlideBar/SideBar";
 import LoginPage from "./Components/AdminPannelComponents/LoginPage";
 import Overview from "./Components/AdminPannelComponents/Overview";
@@ -11,6 +12,7 @@ import MailParticipants from "./Components/AdminPannelComponents/MailParticipant
 const EventRoutes = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
+  const eventId = useSelector((state) => state.eventId.value.eventId);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -18,6 +20,11 @@ const EventRoutes = () => {
 
   // Determine if the current path is the login page
   const isLoginPage = location.pathname.includes("/secure/v3/dasboard/login");
+
+  // If eventId is null, redirect to login
+  if (!eventId && !isLoginPage) {
+    return <Navigate to={`/secure/v3/dasboard/login/${eventId}`} />;
+  }
 
   return (
     <div className="flex">
@@ -54,6 +61,10 @@ const EventRoutes = () => {
           <Route
             path="/secure/v3/dasboard/mail-to-participants/:id"
             element={<MailParticipants />}
+          />
+          <Route
+            path="/"
+            element={<Navigate to={`/secure/v3/dasboard/login/${eventId}`} />}
           />
         </Routes>
       </div>

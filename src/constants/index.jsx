@@ -132,7 +132,7 @@ export const navsFooter = [
   },
 
   {
-    href: "javascript:void(0)",
+    href: "/secure/v3/dasboard/login",
     name: "Logout",
     icon: (
       <svg
