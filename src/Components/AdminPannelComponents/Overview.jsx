@@ -64,7 +64,7 @@ const Overview = () => {
             {/* First Row */}
             <div className="flex space-x-6">
               {/* Box 1: Number of Participants */}
-              <div className="bg-gray-700 p-6 rounded-lg shadow-md flex-1">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-md flex-1">
                 <h2 className="text-lg font-semibold text-gray-100 mb-2">
                   Number of Participants
                 </h2>
@@ -84,7 +84,7 @@ const Overview = () => {
                 </div>
               </div>
               {/* Box 2: Total Sales */}
-              <div className="bg-gray-700 p-6 rounded-lg shadow-md flex-1">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-md flex-1">
                 <h2 className="text-lg font-semibold text-gray-100 mb-2">
                   total sales
                 </h2>
@@ -103,7 +103,7 @@ const Overview = () => {
                 </div>
               </div>
               {/* Box 3: Participants Registered Today */}
-              <div className="bg-gray-700 p-6 rounded-lg shadow-md flex-1">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-md flex-1">
                 <h2 className="text-base font-semibold text-gray-100 mb-2">
                   Participants Registered Today
                 </h2>
@@ -122,14 +122,14 @@ const Overview = () => {
             {/* Second Row */}
             <div className="flex space-x-6">
               {/* Box 4: Graph */}
-              <div className="bg-gray-700 p-6 rounded-lg shadow-md flex-1">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-md flex-1">
                 <h2 className="text-lg font-semibold text-gray-100">
                   Graph Placeholder
                 </h2>
                 {/* Insert your graph component here */}
               </div>
               {/* Box 5: Event Details */}
-              <div className="bg-gray-700 p-6 rounded-lg shadow-md flex-2">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-md flex-2">
                 <h2 className="text-lg font-semibold text-gray-100">
                   Welcome Back Event
                 </h2>
@@ -141,12 +141,12 @@ const Overview = () => {
             </div>
 
             {/* Third Row */}
-            <div className="bg-gray-700 p-6 rounded-lg shadow-md">
+            <div className="bg-gray-800 p-6 rounded-lg shadow-md">
               <h2 className="text-lg font-semibold text-gray-100">
                 Recent Participants
               </h2>
               <div className="overflow-x-auto mt-4">
-                <table className="table-auto w-full text-gray-100">
+                <table className="table-auto w-full text-gray-100 ">
                   <thead>
                     <tr className="bg-gray-600">
                       <th className="px-4 py-2 border border-gray-500">Name</th>
