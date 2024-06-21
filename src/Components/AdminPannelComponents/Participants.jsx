@@ -8,6 +8,7 @@ const Participants = () => {
   const [participants, setParticipants] = useState([]);
   const [modelParticipant, setModelParticipant] = useState(null);
   const [modal, setModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const openModal = (participant) => {
     setModelParticipant(participant);
@@ -32,7 +33,13 @@ const Participants = () => {
       }
     };
     fetchParticipantsApi();
-  }, []);
+  }, [eventSelector.eventId]);
+
+  // Filter participants based on search term
+  const filteredParticipants = participants.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <div className="max-w-screen-xl mx-auto px-4 md:px-8">
@@ -47,24 +54,36 @@ const Participants = () => {
               href="javascript:void(0)"
               className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
             >
-              Event Onboaring
+              Event Onboarding
             </a>
           </div>
         </div>
-        <div className="mt-12 relative h-max overflow-auto">
+
+        {/* Search Box */}
+        <div className="mt-4">
+          <input
+            type="text"
+            className="block w-full px-3 py-2 placeholder-gray-400 text-gray-100  rounded-md shadow-sm focus:border-none border sm:text-sm"
+            placeholder="Search participants by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <div className="mt-6 relative h-max overflow-auto">
           <table className="w-full table-auto text-sm text-left">
             <thead className="text-gray-100 font-medium border-b">
               <tr>
-                <th className="py-3 pr-6">name</th>
-                <th className="py-3 pr-6">date</th>
-                <th className="py-3 pr-6">status</th>
-                <th className="py-3 pr-6">Transcation ID</th>
-                <th className="py-3 pr-6">email</th>
+                <th className="py-3 pr-6">Name</th>
+                <th className="py-3 pr-6">Date</th>
+                <th className="py-3 pr-6">Status</th>
+                <th className="py-3 pr-6">Transaction ID</th>
+                <th className="py-3 pr-6">Email</th>
                 <th className="py-3 pr-6"></th>
               </tr>
             </thead>
             <tbody className="text-gray-100 divide-y">
-              {participants.map((item, idx) => (
+              {filteredParticipants.map((item, idx) => (
                 <tr key={idx}>
                   <td className="pr-6 py-4 whitespace-nowrap">{item.name}</td>
                   <td className="pr-6 py-4 whitespace-nowrap">
@@ -80,12 +99,12 @@ const Participants = () => {
                   <td className="pr-6 py-4 whitespace-nowrap">
                     <span
                       className={`px-3 py-2 rounded-full font-semibold text-xs ${
-                        item?.paymentData?.data?.state == "COMPLETED"
-                          ? "text-green-600 "
-                          : " text-yellow-600"
+                        item?.paymentData?.data?.state === "COMPLETED"
+                          ? "text-green-600"
+                          : "text-yellow-600"
                       }`}
                     >
-                      {item?.paymentData?.data?.state == "COMPLETED"
+                      {item?.paymentData?.data?.state === "COMPLETED"
                         ? "Completed"
                         : "Pending"}
                     </span>
@@ -96,7 +115,7 @@ const Participants = () => {
                   <td className="pr-6 py-4 whitespace-nowrap">{item?.email}</td>
                   <td className="text-right whitespace-nowrap">
                     <button
-                      href="javascript:void()"
+                      href="javascript:void(0)"
                       className="py-1.5 px-2 text-gray-100 bg-indigo-600 hover:bg-indigo-800 duration-150 text-xs rounded-lg"
                       onClick={() => openModal(item)}
                     >
