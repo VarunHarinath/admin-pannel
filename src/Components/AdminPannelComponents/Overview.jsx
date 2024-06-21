@@ -61,6 +61,27 @@ const Overview = () => {
       {eventParticipants.length > 0 && eventData ? (
         <>
           <div className="flex flex-col space-y-6 p-6 rounded-lg shadow-md max-h max-w">
+            {/* Row - 1:Update Evenet Details  */}
+            <div className="flex space-x-6">
+              {/* Box 4: Graph */}
+              <div className="bg-gray-900 p-6 rounded-lg shadow-md flex-1">
+                <h2 className="text-lg font-semibold text-gray-100">
+                  Welcome Back <br />{" "}
+                  <span className="text-indigo-600 font-bold text-xl py-2">
+                    {eventData?.eventName}
+                  </span>
+                </h2>
+                <p className="text-gray-100">
+                  <span className="font-sembold">
+                    Last Date for Registrations:
+                  </span>{" "}
+                  {new Date(eventData?.eventLastDate).toDateString()}
+                </p>
+                <p className="text-gray-100">
+                  Event Price: ₹{eventData?.eventPrice}
+                </p>
+              </div>
+            </div>
             {/* First Row */}
             <div className="flex space-x-6">
               {/* Box 1: Number of Participants */}
@@ -129,15 +150,15 @@ const Overview = () => {
                 {/* Insert your graph component here */}
               </div>
               {/* Box 5: Event Details */}
-              <div className="bg-gray-800 p-6 rounded-lg shadow-md flex-2">
+              {/* <div className="bg-gray-800 p-6 rounded-lg shadow-md flex-2">
                 <h2 className="text-lg font-semibold text-gray-100">
-                  Welcome Back Event
+                  Welcome Back {eventData?.eventName}
                 </h2>
                 <p className="text-gray-100">
                   Last Date for Registrations: June 30, 2024
                 </p>
                 <p className="text-gray-100">Event Price: $100</p>
-              </div>
+              </div> */}
             </div>
 
             {/* Third Row */}
