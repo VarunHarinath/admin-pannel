@@ -58,7 +58,7 @@ const Overview = () => {
   }, []);
   return (
     <>
-      {eventParticipants.length > 0 && eventData ? (
+      {eventParticipants.length && eventData ? (
         <>
           <div className="flex flex-col space-y-6 p-6 rounded-lg shadow-md max-h max-w">
             {/* Row - 1:Update Evenet Details  */}
@@ -226,7 +226,6 @@ const Overview = () => {
               style={{
                 shapeRendering: "auto",
                 display: "block",
-                background: "rgb(0, 0, 0)",
               }}
               className="mb-4"
             >

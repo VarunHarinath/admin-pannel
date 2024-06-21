@@ -9,6 +9,7 @@ const Participants = () => {
   const [modelParticipant, setModelParticipant] = useState(null);
   const [modal, setModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const openModal = (participant) => {
     setModelParticipant(participant);
@@ -27,6 +28,7 @@ const Participants = () => {
           `https://tesract-server.onrender.com/participants/event/${eventSelector.eventId}`
         );
         setParticipants(response.data);
+        setLoading(false);
         console.log(response.data);
       } catch (error) {
         console.log(error);
@@ -39,7 +41,48 @@ const Participants = () => {
   const filteredParticipants = participants.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  if (loading) {
+    return (
+      <>
+        <div className="flex flex-col justify-center items-center h-screen ">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid"
+            width="100"
+            height="100"
+            style={{
+              shapeRendering: "auto",
+              display: "block",
+            }}
+            className="mb-4"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="23"
+              strokeDasharray="108.38494654884786 38.12831551628262"
+              strokeWidth="4"
+              stroke="#3949ab"
+              fill="none"
+            >
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                repeatCount="indefinite"
+                dur="0.9174311926605504s"
+                values="0 50 50;360 50 50"
+                keyTimes="0;1"
+              />
+            </circle>
+          </svg>
+          <h2 className="text-xl font-semibold text-gray-100 mt-4">
+            Gathering Your Paticipants 🎇
+          </h2>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div className="max-w-screen-xl mx-auto px-4 md:px-8">
