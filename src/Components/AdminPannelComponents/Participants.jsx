@@ -143,13 +143,13 @@ const Participants = () => {
                     <span
                       className={`px-3 py-2 rounded-full font-semibold text-xs ${
                         item?.paymentData?.data?.state === "COMPLETED"
-                          ? "text-green-600"
-                          : "text-yellow-600"
+                          ? "text-green-500"
+                          : "text-red-500"
                       }`}
                     >
                       {item?.paymentData?.data?.state === "COMPLETED"
                         ? "Completed"
-                        : "Pending"}
+                        : "failed"}
                     </span>
                   </td>
                   <td className="pr-6 py-4 whitespace-nowrap">
