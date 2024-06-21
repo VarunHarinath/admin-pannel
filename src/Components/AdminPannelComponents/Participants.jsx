@@ -1,10 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import ParticipantsModel from "./utils/ParticipantsModel";
 
 const Participants = () => {
   const eventSelector = useSelector((state) => state.eventId.value);
   const [participants, setParticipants] = useState([]);
+  const [modelParticipant, setModelParticipant] = useState(null);
+  const [modal, setModal] = useState(false);
+
+  const openModal = (participant) => {
+    setModelParticipant(participant);
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModelParticipant(null);
+    setModal(false);
+  };
 
   useEffect(() => {
     const fetchParticipantsApi = async () => {
@@ -72,8 +85,8 @@ const Participants = () => {
                     <span
                       className={`px-3 py-2 rounded-full font-semibold text-xs ${
                         item?.paymentData?.data?.state == "COMPLETED"
-                          ? "text-green-600 bg-green-50"
-                          : "text-blue-600 bg-blue-50"
+                          ? "text-green-600 "
+                          : " text-yellow-600"
                       }`}
                     >
                       {item?.paymentData?.data?.state == "COMPLETED"
@@ -89,9 +102,16 @@ const Participants = () => {
                     <button
                       href="javascript:void()"
                       className="py-1.5 px-2 text-gray-100 bg-indigo-600 hover:bg-indigo-800 duration-150 text-xs rounded-lg"
+                      onClick={() => openModal(item)}
                     >
                       Show More
                     </button>
+
+                    <ParticipantsModel
+                      isOpen={modal}
+                      closeModal={closeModal}
+                      value={modelParticipant}
+                    />
                   </td>
                 </tr>
               ))}
