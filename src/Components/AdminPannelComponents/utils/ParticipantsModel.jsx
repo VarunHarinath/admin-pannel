@@ -88,22 +88,27 @@ const ParticipantsModel = ({ isOpen, closeModal, value }) => {
                   <p className="text-base text-gray-700 dark:text-gray-100 py-1">
                     Payment Status:{" "}
                     <span className="font-semibold text-gray-50">
-                      {value?.paymentData?.data?.state}{" "}
+                      {value?.paymentData?.data?.state
+                        ? value?.paymentData?.data?.state
+                        : "Payment Failed"}{" "}
                     </span>
                   </p>
                   <p className="text-base text-gray-700 dark:text-gray-100 py-1">
                     Transcation Id :{" "}
                     <span className="font-semibold text-gray-50">
-                      {value?.paymentData?.data?.transactionId}{" "}
+                      {value?.paymentData?.data?.transactionId
+                        ? value?.paymentData?.data?.transactionId
+                        : "Payment Failed"}{" "}
                     </span>
                   </p>
                   <p className="text-base text-gray-700 dark:text-gray-100 py-1">
                     Payment Gateway Transcation ID (PG):{" "}
                     <span className="font-semibold text-gray-50">
-                      {
-                        value?.paymentData?.data?.paymentInstrument
-                          ?.pgTransactionId
-                      }{" "}
+                      {value?.paymentData?.data?.paymentInstrument
+                        ?.pgTransactionId
+                        ? value?.paymentData?.data?.paymentInstrument
+                            ?.pgTransactionId
+                        : "Payment Failed"}{" "}
                     </span>
                   </p>
                   <p className="text-base text-gray-700 dark:text-gray-100 py-1">
