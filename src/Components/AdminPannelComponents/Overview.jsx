@@ -58,7 +58,7 @@ const Overview = () => {
   }, []);
   return (
     <>
-      {eventParticipants.length && eventData ? (
+      {eventParticipants && eventData ? (
         <>
           <div className="flex flex-col space-y-6 p-6 rounded-lg shadow-md max-h max-w">
             {/* Row - 1:Update Evenet Details  */}
